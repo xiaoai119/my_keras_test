@@ -70,3 +70,4 @@ def plt_train_loss():
     plt.show()
 
 
+plt_train_loss()
