@@ -48,7 +48,7 @@ model.add(layers.Dropout(0.5))
 # 二分类问题采用sigmoid损失函数
 model.add(layers.Dense(1, activation='sigmoid'))
 model.compile(optimizer=optimizers.RMSprop(lr=2e-5), loss='binary_crossentropy', metrics=['acc'])
-history = model.fit(train_features, train_labels, epochs=30, batch_size=20,
+history = model.fit(train_features, train_labels, epochs=300, batch_size=100,
                     validation_data=(validation_features, validation_labels))
 acc = history.history['acc']
 val_acc = history.history['val_acc']
@@ -59,10 +59,9 @@ plt.plot(epochs, acc, 'b', label='Training acc')
 plt.plot(epochs, val_acc, 'r', label='Validation acc')
 plt.title('accuracy')
 plt.legend()
-plt.figure()
 
 plt.plot(epochs, loss, 'y', label='Training loss')
-plt.plot(epochs, val_loss, 'w', label='Validation loss')
+plt.plot(epochs, val_loss, 'b', label='Validation loss')
 plt.title('Loss')
 plt.legend()
 plt.figure()
