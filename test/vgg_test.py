@@ -60,11 +60,11 @@ plt.plot(epochs, val_acc, 'r', label='Validation acc')
 plt.title('accuracy')
 plt.legend()
 
+plt.figure()
 plt.plot(epochs, loss, 'y', label='Training loss')
 plt.plot(epochs, val_loss, 'b', label='Validation loss')
 plt.title('Loss')
 plt.legend()
-plt.figure()
 
 plt.show()
 
