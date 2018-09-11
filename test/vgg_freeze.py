@@ -17,7 +17,7 @@ test_dir = os.path.join(base_dir, 'test')
 model = models.Sequential()
 model.add(conv_base)
 # 以vgg16作为卷积基
-model.add(layers.Flatten)
+model.add(layers.Flatten())
 model.add(layers.Dense(256, activation='relu'))
 model.add(layers.Dense(1, activation='sigmoid'))
 model.summary()
