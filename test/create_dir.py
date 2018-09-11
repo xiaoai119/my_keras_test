@@ -38,38 +38,41 @@ if not os.path.exists(test_cats_dir):
     os.mkdir(test_cats_dir)
 
 test_dogs_dir = os.path.join(test_dir, 'dogs')
+if not os.path.exists(test_dogs_dir):
+    os.mkdir(test_dogs_dir)
 
-fnames = ['cat.{}.jpg'.format(i) for i in range(1000)]
+
+fnames = ['cat.{}.jpg'.format(i) for i in range(10000)]
 for fname in fnames:
     src = os.path.join(original_dataset_dir, fname)
     dst = os.path.join(train_cats_dir, fname)
     shutil.copyfile(src, dst)
 
-fnames = ['cat.{}.jpg'.format(i) for i in range(1000, 1500)]
+fnames = ['cat.{}.jpg'.format(i) for i in range(10000, 11500)]
 for fname in fnames:
     src = os.path.join(original_dataset_dir, fname)
     dst = os.path.join(validation_cats_dir, fname)
     shutil.copyfile(src, dst)
 
-fnames = ['cat.{}.jpg'.format(i) for i in range(1500, 2000)]
+fnames = ['cat.{}.jpg'.format(i) for i in range(11500, 12500)]
 for fname in fnames:
     src = os.path.join(original_dataset_dir, fname)
     dst = os.path.join(test_cats_dir, fname)
     shutil.copyfile(src, dst)
 
-fnames = ['dog.{}.jpg'.format(i) for i in range(1000)]
+fnames = ['dog.{}.jpg'.format(i) for i in range(10000)]
 for fname in fnames:
     src = os.path.join(original_dataset_dir, fname)
     dst = os.path.join(train_dogs_dir, fname)
     shutil.copyfile(src, dst)
 
-fnames = ['dog.{}.jpg'.format(i) for i in range(1000, 1500)]
+fnames = ['dog.{}.jpg'.format(i) for i in range(10000, 11500)]
 for fname in fnames:
     src = os.path.join(original_dataset_dir, fname)
     dst = os.path.join(validation_dogs_dir, fname)
     shutil.copyfile(src, dst)
 
-fnames = ['dog.{}.jpg'.format(i) for i in range(1500, 2000)]
+fnames = ['dog.{}.jpg'.format(i) for i in range(11500, 12500)]
 for fname in fnames:
     src = os.path.join(original_dataset_dir, fname)
     dst = os.path.join(test_dogs_dir, fname)

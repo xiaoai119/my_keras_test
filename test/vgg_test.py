@@ -14,7 +14,7 @@ train_dir = os.path.join(base_dir, 'train')
 validation_dir = os.path.join(base_dir, 'validation')
 test_dir = os.path.join(base_dir, 'test')
 datagen = ImageDataGenerator(rescale=1. / 255)
-batch_size = 20
+batch_size = 100
 
 
 def extract_features(directory, sample_count):
@@ -34,11 +34,11 @@ def extract_features(directory, sample_count):
 
 
 # 从vgg16预测4*4*512特征图
-train_features, train_labels = extract_features(train_dir, 2000)
-validation_features, validation_labels = extract_features(validation_dir, 1000)
+train_features, train_labels = extract_features(train_dir, 10000)
+validation_features, validation_labels = extract_features(validation_dir, 1500)
 test_features, test_labels = extract_features(test_dir, 1000)
-train_features = np.reshape(train_features, (2000, 4 * 4 * 512))
-validation_features = np.reshape(validation_features, (1000, 4 * 4 * 512))
+train_features = np.reshape(train_features, (10000, 4 * 4 * 512))
+validation_features = np.reshape(validation_features, (1500, 4 * 4 * 512))
 test_features = np.reshape(test_features, (1000, 4 * 4 * 512))
 
 # 定义分类器使用vgg16预测的结果
