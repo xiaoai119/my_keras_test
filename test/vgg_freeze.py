@@ -33,7 +33,7 @@ validation_generator = test_datagen.flow_from_directory(test_dir, target_size=(1
 model.compile(loss='binary_crossentropy', optimizer=optimizers.RMSprop(lr=2e-5), metrics=['acc'])
 history = model.fit_generator(train_generator, epochs=30, steps_per_epoch=100,
                     validation_data=validation_generator,validation_steps=100)
-
+model.save_weights('model_weights.h5', overwrite=True)
 
 def draw_result():
     acc = history.history['acc']

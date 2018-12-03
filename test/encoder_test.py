@@ -1,11 +1,12 @@
-from keras import Input
+import matplotlib.pyplot as plt
 import numpy as np
+import tensorflow.examples.tutorials.mnist.input_data as input_data
+from keras import Input
 from keras.layers import MaxPooling2D, UpSampling2D, Conv2D
 from keras.models import Model
-from tensorflow.examples.tutorials.mnist import input_data
-import matplotlib.pyplot as plt
 
-mnist = input_data.read_data_sets('minist.nzp', one_hot=True)
+# pylint: disable=unused-import
+mnist = input_data.read_data_sets("MNIST_data/", one_hot=True)
 x_train, x_test = mnist.train.images, mnist.test.images
 
 x_train = np.reshape(x_train, (len(x_train), 28, 28, 1))
@@ -18,23 +19,23 @@ x_test_noisy = x_test + noise_factor * np.random.normal(loc=0.0, scale=1.0, size
 x_train_noisy = np.clip(x_train_noisy, 0., 1.)
 x_test_noisy = np.clip(x_test_noisy, 0., 1.)
 
-n = 10
-plt.figure(figsize=(20, 4))
-for i in range(n):
-    # display original images
-    ax = plt.subplot(2, n, i + 1)
-    plt.imshow(x_test[i].reshape(28, 28))
-    plt.gray()
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
-
-    # display noise images
-    ax = plt.subplot(2, n, i + 1 + n)
-    plt.imshow(x_test_noisy[i].reshape(28, 28))
-    plt.gray()
-    ax.get_xaxis().set_visible(False)
-    ax.get_yaxis().set_visible(False)
-plt.show()
+# n = 10
+# plt.figure(figsize=(20, 4))
+# for i in range(n):
+#     # display original images
+#     ax = plt.subplot(2, n, i + 1)
+#     plt.imshow(x_test[i].reshape(28, 28))
+#     plt.gray()
+#     ax.get_xaxis().set_visible(False)
+#     ax.get_yaxis().set_visible(False)
+#
+#     # display noise images
+#     ax = plt.subplot(2, n, i + 1 + n)
+#     plt.imshow(x_test_noisy[i].reshape(28, 28))
+#     plt.gray()
+#     ax.get_xaxis().set_visible(False)
+#     ax.get_yaxis().set_visible(False)
+# plt.show()
 
 input_img = Input(shape=(28, 28, 1))  # (?, 28, 28, 1)
 x = Conv2D(32, (3, 3), activation='relu', padding='same')(input_img)  # (?, 28, 28, 32)
@@ -49,8 +50,8 @@ x = UpSampling2D((2, 2))(x)  # (?, 28, 28, 32)
 decoded = Conv2D(1, (3, 3), activation='sigmoid', padding='same')(x)  # (?, 28, 28, 1)
 
 auto_encoder = Model(input_img, decoded)
-
-auto_encoder.compile(optimizer='sgd', loss='mean_squared_error')
+# auto_encoder.compile(optimizer='sgd', loss='mean_squared_error')
+auto_encoder.compile(optimizer='adadelta', loss='binary_crossentropy')
 
 auto_encoder.fit(x_train_noisy, x_train,  # 输入输出
                  epochs=1,  # 迭代次数
